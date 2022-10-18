@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Ryan Bills">
+    <title>Quadratic Equation Roots</title>
+    <link rel="stylesheet" href="rootsCalculator.css">
+    <script>
+        function calcRoots(form){
+            let a = document.getElementById("a");
+            let b = document.getElementById("b");
+            let c = document.getElementById("c");
+            console.log(a.value);
+            console.log(b.value);
+            console.log(c.value);
+            let d = b.value * b.value - 4 * a.value * c.value;
+            console.log(d);
+            
+
+            if(a.value == 0 || a.value == "" || a.value > 99 || a.value < -99){
+                alert("Invalid entry for a. Must be a non-zero integer between -99 and +99.");
+            }
+            else if(b.value > 99 || b.value < -99){
+                alert("Invalid entry for b. Must be an integer between -99 and +99.");
+            }
+            else if(c.value > 99 || c.value < -99){
+                alert("Invalid entry for c. Must be an integer between -99 and +99.");
+            }
+            else if(b.value*b.value < 4*a.value*c.value){
+                document.getElementById("output").innerHTML
+                = "Solution: <em>x</em>'s roots are imaginary";
+            }
+            else if(b.value*b.value == 4*a.value*c.value){
+                let x = (-b.value / (2 * a.value)).toFixed(3);
+                console.log(x);
+                document.getElementById("output").innerHTML
+                = "Solution: <em>x = </em>" + x;
+            }
+            else if(b.value*b.value > 4*a.value*c.value){
+                let x = (-b.value + Math.sqrt(b.value * b.value - 4 * a.value * c.value)) / (2 * a.value);
+                let y = (-b.value - Math.sqrt(b.value * b.value - 4 * a.value * c.value)) / (2 * a.value);
+                console.log(x);
+                console.log(y);
+                document.getElementById("output").innerHTML
+                = "Solution: <em>x = " + x.toFixed(3) + ", x = " + y.toFixed(3) + "</em>";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h2>Quadratic Equation Roots Calculator</h2>
+    </header>
+    <div>
+        <section>
+            <p>
+                This web page finds the roots of a polynomial equation of the following form:
+                <br>
+                <em>ax<sup>2</sup> + bx + c = 0</em>
+            </p>
+        </section>
+        <section>
+            <p>
+                <em>a, b,</em> and <em>c</em> must be integers between -99 and +99, and <em>a</em> must be a non-zero.
+            </p>
+        </section>
+        <section>
+            <form id="input">
+                <label for="a">a: </label><input type="number" id="a" class="box" min="-99" max="99">
+                <label for="b">b: </label><input type="number" id="b" class="box" min="-99" max="99">
+                <label for="c">c: </label><input type="number" id="c" class="box" min="-99" max="99">
+                <br><br>
+                <input type="button" value="Calculate roots" onclick="calcRoots(this.form)">
+                <br><br>
+                <p id="output">
+
+                </p>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
